@@ -23,14 +23,6 @@ public class Position {
         this.y = position.getY();
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public void setX(int x) {
         this.x = x;
     }
@@ -45,6 +37,14 @@ public class Position {
 
     public void setFile(char rank){
         this.x = (int) rank - 97;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getRank(){

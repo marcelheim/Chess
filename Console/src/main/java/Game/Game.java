@@ -1,3 +1,5 @@
+package Game;
+
 import Enums.Color;
 import Enums.MoveType;
 import Utility.Move;
@@ -13,7 +15,7 @@ public class Game {
     String[][][] printMatrix = new String[8][8][3];
     boolean check;
     boolean checkMate;
-    Position selectedPiecePosition;
+    Piece selectedPieceReference;
     List<Move> selectedPieceMoveList = new ArrayList<>();
 
     public Game() {}
@@ -25,25 +27,32 @@ public class Game {
     public boolean selectPiece(Position piecePosition){
         Piece piece = board[piecePosition.getX()][piecePosition.getY()].getPiece();
         if(piece != null && piece.getColor() == player){
-            selectedPiecePosition = piecePosition;
+            selectedPieceReference = piece;
             piece.createMoves(board);
             selectedPieceMoveList = piece.getMoveList();
             return true;
         }
+        selectedPieceReference = null;
+        selectedPieceMoveList.clear();
         return false;
     }
 
-    public void move(Position piecePosition, Position destination){
+    public boolean move(Position piecePosition, Position destinationPosition){
         Piece piece = board[piecePosition.getX()][piecePosition.getY()].getPiece();
-        MoveType moveType = piece.move(destination, board);
-        if(moveType != MoveType.Undefined){
-            board[piecePosition.getX()][piecePosition.getY()].setPiece(null);
-            board[destination.getX()][destination.getY()].setPiece(piece);
-            halfTurnCounter++;
-            if(player == Color.White) player= Color.Black;
-            else player = Color.White;
-            selectedPieceMoveList = new ArrayList<>();
+        MoveType moveType;
+        if(piece != null){
+            moveType = piece.move(destinationPosition, board);
+            if(moveType != MoveType.Undefined){
+                board[piecePosition.getX()][piecePosition.getY()].setPiece(null);
+                board[destinationPosition.getX()][destinationPosition.getY()].setPiece(piece);
+                halfTurnCounter++;
+                if(player == Color.White) player= Color.Black;
+                else player = Color.White;
+                selectedPieceMoveList.clear();
+                return true;
+            }
         }
+        return false;
     }
 
     public void init(){
@@ -92,10 +101,12 @@ public class Game {
         }
         System.out.println("Player: " + player);
         for (int y = 7; y >= 0; y--) {
+            System.out.print((y + 1) + " ");
             for (int x = 0; x < 8; x++) {
                 System.out.print(printMatrix[x][y][0] + printMatrix[x][y][1] + printMatrix[x][y][2]);
             }
             System.out.println();
         }
+        System.out.println("   a   b   c   d   e   f   g   h");
     }
 }

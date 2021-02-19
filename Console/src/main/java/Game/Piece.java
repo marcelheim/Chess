@@ -1,6 +1,9 @@
+package Game;
+
 import Enums.Color;
 import Enums.MoveType;
 import Enums.PieceType;
+import Game.Cell;
 import Utility.Move;
 import Utility.Position;
 
@@ -13,7 +16,7 @@ public abstract class Piece {
     private Boolean availability;
     private PieceType type;
     private int moveCounter;
-    private List<Move> moveList = new ArrayList<>();
+    private final List<Move> moveList = new ArrayList<>();
 
     public Piece(Color color, Position position, Boolean availability, PieceType type) {
         this.color = color;
@@ -24,10 +27,8 @@ public abstract class Piece {
 
     }
 
-
     public abstract void createMoves(Cell[][] board);
 
-    //ToDo: Implement universal move function
     public MoveType move(Position position, Cell[][] board){
         createMoves(board);
         for (Move move: moveList) {

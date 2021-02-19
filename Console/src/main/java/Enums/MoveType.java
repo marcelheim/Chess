@@ -1,5 +1,5 @@
 package Enums;
 
 public enum MoveType {
-    Undefined, Move, Capture
+    Undefined, Move, Capture, SpecialMove, SpecialCapture
 }

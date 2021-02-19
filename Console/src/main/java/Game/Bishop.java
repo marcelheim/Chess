@@ -1,3 +1,5 @@
+package Game;
+
 import Enums.Color;
 import Enums.MoveType;
 import Enums.PieceType;
@@ -18,7 +20,7 @@ public class Bishop extends Piece {
         while (!end && y + offset < 8 && x + offset < 8) {
             if(board[x + offset][y + offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x + offset, y + offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y + offset)));
+                if(board[x + offset][y + offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y + offset)));
                 end = true;
             }
             offset++;
@@ -28,7 +30,7 @@ public class Bishop extends Piece {
         while (!end && y - offset >= 0 && x + offset < 8) {
             if(board[x + offset][y - offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x + offset, y - offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y - offset)));
+                if(board[x + offset][y - offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y - offset)));
                 end = true;
             }
             offset++;
@@ -38,7 +40,7 @@ public class Bishop extends Piece {
         while (!end && y - offset >= 0 && x - offset >= 0) {
             if(board[x - offset][y - offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x - offset, y - offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y - offset)));
+                if(board[x - offset][y - offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y - offset)));
                 end = true;
             }
             offset++;
@@ -48,7 +50,7 @@ public class Bishop extends Piece {
         while (!end && y + offset < 8 && x - offset >= 0) {
             if(board[x - offset][y + offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x - offset, y + offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y + offset)));
+                if(board[x - offset][y + offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y + offset)));
                 end = true;
             }
             offset++;

@@ -1,3 +1,5 @@
+package Game;
+
 import Enums.Color;
 import Utility.Position;
 

@@ -1,3 +1,5 @@
+package Game;
+
 import Enums.Color;
 import Enums.MoveType;
 import Enums.PieceType;
@@ -18,7 +20,7 @@ public class Rook extends Piece{
         while (!end && y + offset < 8) {
             if(board[x][y + offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x, y + offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x, y + offset)));
+                if(board[x][y + offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x, y + offset)));
                 end = true;
             }
             offset++;
@@ -28,7 +30,7 @@ public class Rook extends Piece{
         while (!end && y - offset >= 0) {
             if(board[x][y - offset].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x, y - offset)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x, y - offset)));
+                if(board[x][y - offset].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x, y - offset)));
                 end = true;
             }
             offset++;
@@ -38,7 +40,7 @@ public class Rook extends Piece{
         while (!end && x + offset < 8) {
             if(board[x + offset][y].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x + offset, y)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y)));
+                if(board[x + offset][y].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x + offset, y)));
                 end = true;
             }
             offset++;
@@ -48,7 +50,7 @@ public class Rook extends Piece{
         while (!end && x - offset >= 0) {
             if(board[x - offset][y].getPiece() == null) getMoveList().add(new Move(MoveType.Move, new Position(x - offset, y)));
             else {
-                getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y)));
+                if(board[x - offset][y].getPiece().getColor() != getColor()) getMoveList().add(new Move(MoveType.Capture, new Position(x - offset, y)));
                 end = true;
             }
             offset++;

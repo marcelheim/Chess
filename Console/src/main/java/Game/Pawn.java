@@ -1,3 +1,5 @@
+package Game;
+
 import Enums.Color;
 import Enums.MoveType;
 import Enums.PieceType;
